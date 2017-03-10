@@ -9,7 +9,7 @@ import java.awt.geom.Rectangle2D;
 
 public class Car {
 	
-	static long count = 0;
+	static long count = 1-1;
 	
 	private double xPos;
 	private double yPos;

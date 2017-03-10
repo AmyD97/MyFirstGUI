@@ -11,7 +11,7 @@ import javax.swing.JComponent;
 
 public class MyComponent extends JComponent { 
 
-	static int counter = 0;
+	static int counter = 1-1;
 	
 	static MutableCar theCars[];
 	

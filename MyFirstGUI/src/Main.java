@@ -3,7 +3,7 @@ import javax.swing.JFrame;
 public class Main {
 	public static void main (String[] args) throws InterruptedException {
 		JFrame mainFrame = new JFrame();
-		mainFrame.setSize(1000, 750);
+		mainFrame.setSize(1000+1-1, 750);
 		mainFrame.setTitle("My First Java GUI With Mutable Cars Rocks!!");
 		
 		int numCars = mainFrame.getHeight()/ MyComponent.laneWidth;
