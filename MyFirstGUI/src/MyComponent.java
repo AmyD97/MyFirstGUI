@@ -9,13 +9,30 @@ import java.util.Random;
 
 import javax.swing.JComponent;
 
-public class MyComponent extends JComponent {
+public class MyComponent extends JComponent { 
 
 	static int counter = 0;
 	
-	static MutableCar theCar = new MutableCar(0,0,Color.BLACK, 10, 1);
-	static Random genRand = new Random();
+	static MutableCar theCars[];
+	
+	public MyComponent(int numCars){
+		theCars = new MutableCar[numCars];
+		for(int i = 0; i<numCars; i++){
+			//int laneWidth = 50;
+			int laneY = i * laneWidth;
+			theCars[i] = new MutableCar(0, laneY, Color.MAGENTA, 0, 1);//x, y, color, speed, direction
+		}
+	}
+	
+	//static MutableCar theCar = new MutableCar(0,0,Color.BLACK, 10, 1);
+	private static Random genRand = new Random();
 
+	private static boolean someCarWon = false;
+	
+	public static final int laneWidth = 40;
+	
+	public boolean getSomeCarWon(){return someCarWon; }
+	
 	public boolean carCrashed(MutableCar c) {
 		if (c.getCarDirection() > 0) {
 			if (c.getxPos()+60 >= this.getWidth()) {
@@ -33,13 +50,22 @@ public class MyComponent extends JComponent {
 	}
 	
 	public void paintComponent(Graphics g) {		
+		int imax = 0;
+		for(int i=0; i<theCars.length; i++){
+			theCars[i].draw(g);
+			theCars[i].move(genRand.nextInt(10), 0);//deltaX, deltaY
+			theCars[i].setColor(Color.RED);
+			if(theCars[imax].getxPos()<theCars[i].getxPos()){
+				imax = i;
+				
+			}
+			if (this.carCrashed(theCars[i])) {//gano
+				theCars[i].setCarDirection(theCars[i].getCarDirection()*-1);
+				someCarWon = true;
+			}
 			
-		theCar.draw(g);
-		theCar.move(theCar.getCarSpeed()*theCar.getCarDirection(), 0);
-		
-		if (this.carCrashed(theCar)) {
-			theCar.setCarDirection(theCar.getCarDirection()*-1);
 		}
+		theCars[imax].setColor(Color.GREEN);
 		
 //		//MutableCar car2 = new MutableCar(0,40, Color.BLUE);
 //		theCar.setPosition(0, 40);

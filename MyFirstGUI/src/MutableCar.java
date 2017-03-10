@@ -54,6 +54,13 @@ public class MutableCar {
 		return xPos;
 	}
 
+	public void setColor(Color c){
+		this.carColor = c;
+	}
+	/*public void getColor(){
+		this.carColor = c.setColor();
+	}*/
+	
 	public void setxPos(double xPos) {
 		this.xPos = xPos;
 	}
@@ -99,9 +106,12 @@ public class MutableCar {
 		g2.draw(rearWindow);
 		g2.draw(roof);
 		g2.draw(frontWindow);
+		g2.fill(body);
 		g2.draw(body);
 		g2.setColor(Color.BLACK);
 		g2.draw(rearTire);
+		g2.fill(rearTire);
+		g2.fill(frontTire);
 		g2.draw(frontTire);
 		
 		count++;
